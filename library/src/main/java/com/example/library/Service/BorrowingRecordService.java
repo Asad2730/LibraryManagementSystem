@@ -1,24 +1,28 @@
 package com.example.library.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.library.Entity.BookEntity;
+
 import com.example.library.Entity.BorrowingRecordEntity;
-import com.example.library.Entity.PatronEntity;
+
 import com.example.library.Repository.BorrowingRecordRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
 
 @Service
 public class BorrowingRecordService {
+     
+    @PersistenceContext
+     EntityManager entityManager;  
+
      @Autowired
     private BorrowingRecordRepository repo;
     private  BookService bookService;
@@ -35,13 +39,27 @@ public class BorrowingRecordService {
          return repo.save(entity);
     }
 
-
-    public BorrowingRecordEntity returnBook(Long bookId, Long patronId){
+    public BorrowingRecordEntity returnBook(Long bookId, Long patronId) {
        
-        EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("");
+        String jpql = "SELECT br FROM BorrowingRecord br " +
+                      "WHERE br.book.id = :bookId " +
+                      "AND br.patron.id = :patronId " +
+                      "AND br.returnDate IS NULL";
         
-        BorrowingRecordEntity rs = query.getClass();
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("bookId", bookId);
+        query.setParameter("patronId", patronId);
+
+       
+        var borrowingRecord = (BorrowingRecordEntity) query.getSingleResult();
+
+       
+        borrowingRecord.setReturnDate(LocalDate.now());
+
+     
+        repo.save(borrowingRecord);
+
+        return borrowingRecord;
     }
 
 
