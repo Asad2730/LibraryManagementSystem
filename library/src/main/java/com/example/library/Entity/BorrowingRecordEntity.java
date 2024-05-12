@@ -7,13 +7,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
 
 @Entity
-@Table(name = "BorrowingRecord")
 public class BorrowingRecordEntity {
     
-      @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
@@ -22,14 +21,11 @@ public class BorrowingRecordEntity {
     private PatronEntity patron;
     private LocalDate borrowDate;
     private LocalDate returnDate;
-       
 
-    public BorrowingRecordEntity(){}
-
+   
     public Long getId() {
         return id;
     }
-    
     public BookEntity getBook() {
         return book;
     }
@@ -48,12 +44,17 @@ public class BorrowingRecordEntity {
     public void setBorrowDate(LocalDate borrowDate) {
         this.borrowDate = borrowDate;
     }
+
     public LocalDate getReturnDate() {
         return returnDate;
     }
+
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
-    
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
 }
