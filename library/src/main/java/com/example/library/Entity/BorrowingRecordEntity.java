@@ -1,4 +1,4 @@
-package com.example.library.Entity;
+package com.example.library.entity;
 
 import java.time.LocalDate;
 
@@ -7,8 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "BorrowingRecord")
 public class BorrowingRecordEntity {
     
       @Id
@@ -20,7 +22,9 @@ public class BorrowingRecordEntity {
     private PatronEntity patron;
     private LocalDate borrowDate;
     private LocalDate returnDate;
+       
 
+    public BorrowingRecordEntity(){}
 
     public Long getId() {
         return id;

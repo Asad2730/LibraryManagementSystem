@@ -1,35 +1,34 @@
-package com.example.library.Service;
+package com.example.library.service;
 
 import java.time.LocalDate;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-
-import com.example.library.Entity.BorrowingRecordEntity;
-
-import com.example.library.Repository.BorrowingRecordRepository;
+import com.example.library.entity.BorrowingRecordEntity;
+import com.example.library.repository.BorrowingRecordRepository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.PersistenceContext;
+
+
 import jakarta.persistence.Query;
 
 
 @Service
 public class BorrowingRecordService {
-     
-    @PersistenceContext
-     EntityManager entityManager;  
 
-     @Autowired
     private BorrowingRecordRepository repo;
     private  BookService bookService;
     private  PatronService patronService;
+  
+    private EntityManager entityManager;  
 
-    @Autowired
-    EntityManagerFactory emf;
+
+  
+    BorrowingRecordService(BorrowingRecordRepository reop){
+        this.repo = reop;
+    }
 
     public BorrowingRecordEntity borrowBook(Long bookId, Long patronId) {
          var entity = new BorrowingRecordEntity();

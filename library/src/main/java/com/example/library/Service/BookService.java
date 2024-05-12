@@ -1,22 +1,23 @@
-package com.example.library.Service;
+package com.example.library.service;
 
 import java.util.List;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.library.Entity.BookEntity;
-import com.example.library.ErrorHandling.ResourceNotFoundException;
-import com.example.library.Repository.BookRepository;
+import com.example.library.entity.BookEntity;
+import com.example.library.errorHandling.ResourceNotFoundException;
+import com.example.library.repository.BookRepository;
 
 @Service
 public class BookService {
     
-    @Autowired
-    private BookRepository repo;
-
-
+   
+    private  BookRepository repo;
+    
+     BookService(BookRepository repo){
+        this.repo = repo;
+     }
+   
     public List<BookEntity> getAllBooks(){
         return repo.findAll();
     }
@@ -28,6 +29,7 @@ public class BookService {
 
 
     public BookEntity createBook(BookEntity entity){
+       
         return repo.save(entity);
     }
 

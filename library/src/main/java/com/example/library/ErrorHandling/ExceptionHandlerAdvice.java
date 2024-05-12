@@ -1,4 +1,4 @@
-package com.example.library.ErrorHandling;
+package com.example.library.errorHandling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

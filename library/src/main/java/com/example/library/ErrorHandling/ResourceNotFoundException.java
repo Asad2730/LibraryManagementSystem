@@ -1,4 +1,4 @@
-package com.example.library.ErrorHandling;
+package com.example.library.errorHandling;
 
 public class ResourceNotFoundException extends RuntimeException {
     

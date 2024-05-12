@@ -1,21 +1,24 @@
-package com.example.library.Service;
+package com.example.library.service;
 
 import java.util.List;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
-import com.example.library.Entity.PatronEntity;
-import com.example.library.ErrorHandling.ResourceNotFoundException;
-import com.example.library.Repository.PatronRepository;
+
+import com.example.library.entity.PatronEntity;
+import com.example.library.errorHandling.ResourceNotFoundException;
+import com.example.library.repository.PatronRepository;
 
 @Service
 public class PatronService {
     
-    @Autowired
+
     private PatronRepository repo;
 
-
+      PatronService(PatronRepository repo){
+        this.repo = repo;
+     }
     public List<PatronEntity> getAllPatron(){
         return repo.findAll();
     }
