@@ -29,7 +29,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookEntity createBook(BookEntity entity){
-        System.out.println("entity:="+entity.getClass().toGenericString());
         return repo.save(entity);
     }
     

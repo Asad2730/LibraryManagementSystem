@@ -10,24 +10,28 @@ import com.example.library.errorHandling.ResourceNotFoundException;
 import com.example.library.repository.PatronRepository;
 
 @Service
-public class PatronServiceImpl {
+public class PatronServiceImpl implements PatronService {
     
     @Autowired
     private PatronRepository repo;
-
+    
+    @Override
     public List<PatronEntity> getAllPatron() {
         return repo.findAll();
-    }
-
+    } 
+   
+    @Override
     public PatronEntity getPatronById(Long id) {
         return repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Patron", "id", id));
     }
-
+    
+    @Override
     public PatronEntity createPatron(PatronEntity entity) {
         return repo.save(entity);
     }
-
+    
+    @Override
     public PatronEntity updatePatron(Long id, PatronEntity entity) {
 
         return repo.findById(id)
@@ -38,7 +42,8 @@ public class PatronServiceImpl {
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Patron", "id", id));
     }
-
+   
+    @Override
     public void deletePatron(Long id) {
         repo.deleteById(id);
     }

@@ -15,7 +15,7 @@ import jakarta.persistence.Query;
 
 
 @Service
-public class BorrowingRecordServiceImpl {
+public class BorrowingRecordServiceImpl implements BorrowingRecordService{
     
     @Autowired
     private BorrowingRecordRepository repo;
@@ -31,7 +31,7 @@ public class BorrowingRecordServiceImpl {
 
   
  
-
+    @Override
     public BorrowingRecordEntity borrowBook(Long bookId, Long patronId) {
          var entity = new BorrowingRecordEntity();
          entity.setBook(bookService.getBooKById(bookId));
@@ -39,7 +39,7 @@ public class BorrowingRecordServiceImpl {
          entity.setBorrowDate(LocalDate.now());
          return repo.save(entity);
     }
-
+     @Override
     public BorrowingRecordEntity returnBook(Long bookId, Long patronId) {
        
         String jpql = "SELECT br FROM borrowRecords br " +
