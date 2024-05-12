@@ -16,9 +16,7 @@ public class PatronService {
 
     private PatronRepository repo;
 
-      PatronService(PatronRepository repo){
-        this.repo = repo;
-     }
+     
     public List<PatronEntity> getAllPatron(){
         return repo.findAll();
     }

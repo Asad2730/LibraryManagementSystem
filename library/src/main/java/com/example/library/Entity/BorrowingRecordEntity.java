@@ -2,24 +2,35 @@ package com.example.library.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 
 @Entity
+@Table(name = "borrowRecords")
 public class BorrowingRecordEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "book")
     @ManyToOne
     private BookEntity book;
+    
+    @Column(name="patron")
     @ManyToOne
     private PatronEntity patron;
+
+    @Column(name="localDate")
     private LocalDate borrowDate;
+
+    @Column(name = "returnDate")
     private LocalDate returnDate;
 
    

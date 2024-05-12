@@ -2,7 +2,7 @@ package com.example.library.service;
 
 import java.util.List;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.library.entity.BookEntity;
@@ -12,14 +12,9 @@ import com.example.library.repository.BookRepository;
 @Service
 public class BookService {
     
-    
+    @Autowired
     private  BookRepository repo;
      
-    
-     BookService(BookRepository repo){
-        this.repo = repo;
-     }
-   
     public List<BookEntity> getAllBooks(){
         return repo.findAll();
     }
@@ -31,7 +26,7 @@ public class BookService {
 
 
     public BookEntity createBook(BookEntity entity){
-       
+        System.out.println("entity:="+entity.getClass().toGenericString());
         return repo.save(entity);
     }
 

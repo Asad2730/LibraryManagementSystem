@@ -26,9 +26,7 @@ public class BorrowingRecordService {
 
 
   
-    BorrowingRecordService(BorrowingRecordRepository reop){
-        this.repo = reop;
-    }
+ 
 
     public BorrowingRecordEntity borrowBook(Long bookId, Long patronId) {
          var entity = new BorrowingRecordEntity();
@@ -40,7 +38,7 @@ public class BorrowingRecordService {
 
     public BorrowingRecordEntity returnBook(Long bookId, Long patronId) {
        
-        String jpql = "SELECT br FROM BorrowingRecord br " +
+        String jpql = "SELECT br FROM borrowRecords br " +
                       "WHERE br.book.id = :bookId " +
                       "AND br.patron.id = :patronId " +
                       "AND br.returnDate IS NULL";
